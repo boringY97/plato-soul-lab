@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5efe3">
+<meta name="description" content="柏拉图灵魂三分测试：12道情境题，看看你的灵魂由理性、激情还是欲望主导。趣味自评，免费。">
+<title>灵魂三分测试 · PLATO SOUL</title>
+<style>
+:root{--paper:#f5efe3;--card:#fffdf6;--ink:#2b2620;--sub:#7a7264;--gold:#a67c2e;--gold2:#c9a24b;--line:#e5dcc6;--silver:#7a7f87;--bronze:#a06a3b;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+*{box-sizing:border-box}html{min-height:100%;background:#ece4d0}body{margin:0;min-height:100vh;color:var(--ink);background:radial-gradient(ellipse at 15% 0%,#fbf6e8 0%,transparent 45%),radial-gradient(ellipse at 90% 90%,#e8dcc0 0%,transparent 45%),var(--paper);font-size:15px;-webkit-font-smoothing:antialiased}button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}button:disabled{cursor:not-allowed;opacity:.42}
+#app{max-width:480px;margin:0 auto;min-height:100vh;background:var(--paper);box-shadow:0 0 70px rgba(90,70,30,.12);overflow:hidden}
+.shell{padding:0 24px 28px;min-height:100vh;display:flex;flex-direction:column}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding-top:calc(18px + env(safe-area-inset-top));padding-bottom:16px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:900;font-size:12px;letter-spacing:2px;color:#4a3f2c}.brand-symbol{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#fff;font-size:16px}
+.utility{background:#fffdf6;border:1px solid var(--line);padding:8px 12px;border-radius:999px;font-size:11px;color:#8a7f68}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;border:1px solid #d9c48f;background:#fff8e6;border-radius:999px;color:#8a6d1f;padding:7px 12px;font-size:11px;font-weight:800;letter-spacing:1px}
+.hero-title{font-family:Georgia,"Songti SC","SimSun",serif;font-size:clamp(36px,10vw,46px);line-height:1.2;letter-spacing:-1px;margin:20px 0 10px;font-weight:900}
+.hero-title .em{color:var(--gold)}
+.hero-sub{color:#6f6455;line-height:1.9;font-size:14px;margin:12px 0 0}.hero-sub strong{color:#3d3325}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:22px 0 18px}
+.trio div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 6px 11px;text-align:center}
+.trio b{font-size:22px;display:block}.trio span{display:block;font-size:12px;font-weight:800;margin-top:4px}.trio small{display:block;font-size:10px;margin-top:3px;color:#968a76}
+.primary{border:0;border-radius:18px;color:#fff;background:linear-gradient(115deg,#b08a2e,#8a6d1f);font-weight:900;width:100%;padding:18px 20px;min-height:56px;box-shadow:0 12px 24px rgba(150,115,30,.3);font-size:16px}
+.primary:active:not(:disabled){transform:scale(.985)}
+.secondary-btn{border:1px solid var(--line);border-radius:16px;background:#fffdf6;color:#5c4f38;padding:13px 15px;font-weight:800}
+.fineprint{font-size:11px;color:#a2937e;line-height:1.7;text-align:center;margin:13px auto 0}
+.foot{padding-bottom:calc(8px + env(safe-area-inset-bottom));margin-top:auto}
+.quiz-top{margin-top:22px;display:flex;justify-content:space-between;align-items:end}
+.quiz-counter{font-size:12px;color:#968a76;font-weight:700}.quiz-counter b{font-size:28px;color:#2b2620}
+.quiz-sect{font-size:11px;font-weight:800;color:#8a6d1f;background:#fff3d6;padding:9px 11px;border-radius:999px}
+.progress-track{height:7px;background:#eadfc2;border-radius:10px;margin:15px 0 40px;overflow:hidden}.progress-fill{height:100%;width:0%;border-radius:10px;background:linear-gradient(90deg,#d9b45b,#8a6d1f);transition:width .3s}
+.q-title{font-family:Georgia,"Songti SC","SimSun",serif;font-size:27px;line-height:1.5;font-weight:900;margin:12px 0 12px}
+.q-hint{font-size:13px;color:#968a76;margin-bottom:26px;line-height:1.7}
+.options{display:grid;gap:11px}
+.answer{display:flex;gap:12px;align-items:center;text-align:left;border:1.5px solid #e8ddc2;background:#fffdf6;border-radius:16px;min-height:62px;padding:13px 15px;color:#5a4c38;font-weight:700}
+.answer.selected{background:#fff6dd;border-color:var(--gold);color:#7a5c14}
+.radio-circle{height:26px;width:26px;border:1.5px solid #d9cba6;border-radius:50%;display:grid;place-items:center;flex-shrink:0;color:#fff;font-size:13px;background:#fff}
+.answer.selected .radio-circle{background:var(--gold);border-color:var(--gold)}
+.choice-num{margin-left:auto;font-size:10px;color:#b3a888;font-weight:700}
+.quiz-footer{margin-top:auto;display:grid;grid-template-columns:82px 1fr;gap:11px;padding-top:35px;padding-bottom:calc(13px + env(safe-area-inset-bottom))}
+.result-panel{background:var(--card);border-radius:24px;border:1px solid var(--line);margin-top:20px;padding:24px 22px;box-shadow:0 24px 60px rgba(90,70,30,.1)}
+.result-lead{font-size:11px;color:var(--gold);font-weight:900;letter-spacing:1.5px}
+.result-tag{font-family:Georgia,"Songti SC","SimSun",serif;font-size:32px;font-weight:900;margin:10px 0}
+.result-quote{font-size:13px;color:#6f6069;line-height:1.85}
+.score-area{margin-top:18px}
+.bar-row{margin:14px 0}.bar-label{display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:#675860;margin-bottom:8px}.bar-label b{color:#8a6d1f;font-size:13px}
+.bar-track{height:10px;border-radius:30px;background:#f0e8d2;overflow:hidden}.bar-fill{height:100%;background:linear-gradient(90deg,#d9b45b,#8a6d1f);border-radius:20px;transition:width .6s}
+.insight{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fffdf6;margin:11px 0;color:#57424d;font-size:13px;line-height:1.8}
+.insight b{display:block;margin-bottom:4px;color:#8a6d1f;font-size:12px}
+.sec-title{font-weight:900;font-size:18px;margin:24px 0 10px}
+.share-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 10px}.share-row .secondary-btn{font-size:12px}
+.report-foot{font-size:11px;color:#a89a80;line-height:1.8;padding:18px 0 12px;text-align:center}
+.modal-bg{position:fixed;inset:0;background:rgba(43,38,32,.6);z-index:10;display:grid;place-items:end center;padding:12px}
+.modal{background:#fffdf6;width:min(100%,438px);border-radius:24px;padding:26px 22px calc(24px + env(safe-area-inset-bottom));max-height:90dvh;overflow:auto}
+.modal .close{float:right;border:0;background:#f0e8d2;color:#7b6a4d;border-radius:50%;width:33px;height:33px;font-weight:900}
+.modal h2{font-size:22px;margin:8px 0 10px}.modal p{font-size:13px;line-height:1.8;color:#6f6455}
+.toast{position:fixed;left:50%;bottom:25px;transform:translateX(-50%);background:#3a3226;color:#fff;padding:12px 18px;border-radius:14px;font-size:12px;z-index:25;max-width:min(88vw,410px);text-align:center}
+.hidden{display:none!important}
+@media(min-width:680px){#app{margin:25px auto;min-height:850px;border-radius:28px}.shell{min-height:850px}.modal-bg{place-items:center}}
+</style>
+</head>
+<body>
+<div id="app" aria-live="polite"></div>
+<div id="modal-root"></div>
+<script>
+'use strict';
+// 全部计算仅在用户的浏览器里进行：不采集答案，不接后端，不收费。
+// 题目顺序已打乱（理性 / 激情 / 欲望交错出现），避免按维度成块作答。
+const QUESTIONS = [
+  {d:'reason',t:'做重要决定之前，我会先想清楚利弊再行动。'},
+  {d:'spirit',t:'被人小看的时候，我特别想证明自己。'},
+  {d:'appetite',t:'看到喜欢吃的东西，我很难忍住不买。'},
+  {d:'reason',t:'我常常凭第一感觉做决定，事后再想对不对。',reverse:true},
+  {d:'spirit',t:'输赢对我来说无所谓，参与一下就行。',reverse:true},
+  {d:'appetite',t:'我能为了长远目标，忍住眼前的享受。',reverse:true},
+  {d:'reason',t:'遇到复杂问题，我会把它拆成几步慢慢想。'},
+  {d:'spirit',t:'看到不公平的事，我会忍不住站出来。'},
+  {d:'appetite',t:'刷手机看到喜欢的东西，我常常忍不住就下单了。'},
+  {d:'reason',t:'别人情绪激动的时候，我反而更容易保持冷静。'},
+  {d:'spirit',t:'得到认可和表扬，对我来说很重要。'},
+  {d:'appetite',t:'为了开心，我常常花超出预算的钱。'}
+];
+const DIMENSIONS = {
+  reason: {name:'理性',metal:'金',high:'你做决定先讲道理：先想利弊，再看长远，情绪来了也能先按下，等冷静了再开口。',low:'理性在你这里不常抢方向盘，决定更多跟着感觉和当下走。',action:'下次想冲动决定时，先给自己 10 分钟，写下 1 个好处和 1 个代价再选。'},
+  spirit: {name:'激情',metal:'银',high:'荣誉和尊严对你很重要：被人小看就想证明自己，看到不公平就想站出来，认可本身就是奖励。',low:'输赢和别人的评价对你牵动不大，你不太靠证明自己来确认价值。',action:'把“想证明自己”换成一个具体目标：这周要做到哪一件小事，就算赢。'},
+  appetite: {name:'欲望',metal:'铜',high:'及时享乐对你很有吸引力：好吃的、好玩的、想买的来了，很难忍住，先开心了再说。',low:'你比较能忍住眼前的享受，为了更想要的东西等一等。',action:'想买非必需品时先放进收藏夹，24 小时后还想买再买。'}
+};
+const TYPES = {
+  reason: {name:'金 · 统治者',caption:'你的灵魂由理性掌舵。',quote:'像《理想国》里的金质统治者：先想清楚，再行动。冷静不是没感情，是感情排在道理后面。',line:'先想清楚，再行动。'},
+  spirit: {name:'银 · 护卫者',caption:'你的灵魂由血气点燃。',quote:'像银质护卫者：为荣誉而战，为不公发声。你的能量来自“值得”两个字，一旦认准就很难劝退。',line:'为值得的事站出来。'},
+  appetite: {name:'铜 · 生产者',caption:'你的灵魂由欲望驱动。',quote:'像铜铁质生产者：活在当下，享受具体的好东西。你的快乐很实在：吃好、玩好、花得开心。',line:'先开心，再说别的。'},
+  balanced: {name:'三元议会',caption:'你的灵魂三部分轮流坐庄。',quote:'没有哪一部分一家独大：理性、激情、欲望三方经常开会，谁声音大听谁的。这是最难得的平衡，也是最容易纠结的一种。',line:'三方开会，轮流做主。'}
+};
+const OPT = ['完全不像我','不太像我','有一点像','比较像我','这就是我'];
+const state={page:'intro',i:0,answers:Array(QUESTIONS.length).fill(null)};
+const app=document.querySelector('#app');
+const modals=document.querySelector('#modal-root');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const toPercent=(sum,n)=>Math.round((sum-n)/((n*5)-n)*100);
+function getResult(){
+  const dims={};for(const k of Object.keys(DIMENSIONS)){
+    let sum=0,n=0;
+    QUESTIONS.forEach((q,i)=>{if(q.d!==k)return;n++;const a=state.answers[i]??3;sum+=(q.reverse?6-a:a)});
+    dims[k]=toPercent(sum,n);
+  }
+  const ordered=Object.keys(dims).sort((a,b)=>dims[b]-dims[a]);
+  const top=ordered[0],second=ordered[1],low=ordered[2];
+  const balanced=dims[top]-dims[second]<8;
+  const type=balanced?'balanced':top;
+  return {dims,ordered,top,second,low,balanced,type};
+}
+function frame(content){
+  app.innerHTML=`<div class="shell"><header class="topbar"><div class="brand"><div class="brand-symbol">Φ</div><span>PLATO SOUL</span></div><button class="utility" type="button" data-action="about">关于测试 ⓘ</button></header>${content}</div>`;
+  app.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>onAction(b.dataset.action)));
+}
+function intro(){state.page='intro';frame(`<main><div class="eyebrow">柏拉图《理想国》· 灵魂三分</div><h1 class="hero-title">你的灵魂<br><span class="em">由谁主导？</span></h1><p class="hero-sub">柏拉图说，人的灵魂有三个部分：<strong>理性、激情、欲望</strong>。<br>理性像舵手，激情像战马，欲望像拉车的马。<br><strong>12 道情境题，看看谁在你心里说了算。</strong></p><div class="trio"><div><b style="color:#a67c2e">◆</b><span>理性 · 金</span><small>想清楚再行动</small></div><div><b style="color:#7a7f87">▲</b><span>激情 · 银</span><small>为荣誉而战</small></div><div><b style="color:#a06a3b">●</b><span>欲望 · 铜</span><small>先开心再说</small></div></div><button class="primary" data-action="start" type="button">开始测试 →</button><p class="fineprint">12 道题 · 约 2 分钟 · 免费<br>趣味自评，不是心理诊断或科学量表。</p></main><div class="foot"></div>`)}
+function quiz(){state.page='quiz';const q=QUESTIONS[state.i],number=state.i+1;frame(`<main><div class="quiz-top"><div class="quiz-counter"><b>${String(number).padStart(2,'0')}</b> / 12</div><div class="quiz-sect">灵魂三分 · 第 ${number} 题</div></div><div class="progress-track" role="progressbar" aria-label="答题进度" aria-valuenow="${number}" aria-valuemax="12"><div class="progress-fill" style="width:${((number-1)/12)*100}%"></div></div><h1 class="q-title">${esc(q.t)}</h1><p class="q-hint">想象自己真正遇到这种情况，选最像你的反应。没有标准答案。</p><div class="options" role="radiogroup" aria-label="符合程度">${OPT.map((o,i)=>`<button class="answer ${state.answers[state.i]===i+1?'selected':''}" type="button" role="radio" aria-checked="${state.answers[state.i]===i+1}" data-value="${i+1}"><span class="radio-circle">${state.answers[state.i]===i+1?'✓':''}</span><span>${o}</span><span class="choice-num">0${i+1}</span></button>`).join('')}</div></main><div class="quiz-footer"><button class="secondary-btn" type="button" data-action="back">${state.i===0?'返回':'上一题'}</button><button class="primary" type="button" data-action="next" ${state.answers[state.i]===null?'disabled':''}>${state.i===11?'生成我的结果':'下一题 →'}</button></div>`);
+  app.querySelectorAll('[data-value]').forEach(b=>b.addEventListener('click',()=>{state.answers[state.i]=Number(b.dataset.value);quiz()}));
+}
+function dimBars(r){return Object.keys(DIMENSIONS).map(k=>`<div class="bar-row"><div class="bar-label"><span>${DIMENSIONS[k].name} · ${DIMENSIONS[k].metal}</span><b>${r.dims[k]}%</b></div><div class="bar-track"><div class="bar-fill" style="width:${r.dims[k]}%"></div></div></div>`).join('')}
+function result(){state.page='result';const r=getResult();const t=TYPES[r.type];const top=DIMENSIONS[r.top];const low=DIMENSIONS[r.low];frame(`<main><div class="eyebrow">测试完成 · 你的灵魂档案</div><div class="result-panel"><div class="result-lead">PLATO SOUL / YOUR TYPE</div><h1 class="result-tag">${t.name}</h1><div class="result-quote">${t.caption}<br>${t.quote}</div><div class="score-area">${dimBars(r)}<p style="font-size:11px;color:#a89a80;margin-top:14px">分数越高，仅表示你在本次自评中越认同相关描述；不是人群排名。</p></div></div><h2 class="sec-title">你的灵魂构成</h2><div class="insight"><b>◆ 最强：${top.name} ${r.dims[r.top]}%</b>${r.dims[r.top]>=55?top.high:top.low}</div><div class="insight"><b>◆ 最弱：${low.name} ${r.dims[r.low]}%</b>${r.dims[r.low]>=55?`此项得分仍为 ${r.dims[r.low]}%，并不代表它不存在。${low.high}`:low.low}</div><div class="insight"><b>◆ 给你的一个建议</b>${DIMENSIONS[r.top].action}</div><div class="share-row"><button class="secondary-btn" data-action="poster">↓ 保存结果海报</button><button class="secondary-btn" data-action="copy">⧉ 复制结果</button></div><button class="secondary-btn" style="width:100%;margin-top:2px" data-action="restart">↻ 再测一次</button><div class="report-foot">柏拉图《理想国》灵魂三分的通俗化改编，趣味自评，不用于诊断或判断个人价值。</div></main>`)}
+function about(){showModal(`<button class="close" data-close="1" aria-label="关闭">×</button><div class="eyebrow">产品说明</div><h2>关于灵魂三分测试</h2><p>柏拉图在《理想国》里把灵魂分成三部分：理性（Logistikon）、激情（Thymos）、欲望（Epithymia）。理性负责思考和判断，激情负责荣誉、勇气和愤怒，欲望负责食色与享乐。三种人对应金、银、铜三种质地。</p><p>本测试是这一理论的通俗化改编：12 道情境题，每维 4 题、其中 1 题反向计分，三个维度权重相同。结果只反映你本次的自我描述，不是医学或心理学诊断，也不代表人群百分位。</p><p><b>隐私：</b>答案仅在本地页面运行时计算，不提交到服务器。刷新页面会清空答案。本版本不使用第三方分析服务，不收费。</p><button class="primary" data-close="1" style="margin-top:6px">了解了</button>`)}
+function showModal(html){modals.innerHTML=`<div class="modal-bg"><div class="modal" role="dialog" aria-modal="true">${html}</div></div>`;modals.querySelector('.modal-bg').addEventListener('click',e=>{if(e.target.classList.contains('modal-bg'))closeModal()});modals.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',closeModal));}
+function closeModal(){modals.innerHTML=''}
+function toast(message){document.querySelectorAll('.toast').forEach(n=>n.remove());const n=document.createElement('div');n.className='toast';n.textContent=message;document.body.appendChild(n);setTimeout(()=>n.remove(),2400)}
+function scrollTop(){window.scrollTo({top:0,behavior:'instant'})}
+function restart(){state.i=0;state.answers.fill(null);intro();scrollTop()}
+function onAction(action){switch(action){case 'about':about();break;case 'start':state.i=0;quiz();scrollTop();break;case 'back':if(state.i===0)intro();else{state.i--;quiz()}scrollTop();break;case 'next':if(state.answers[state.i]===null)return;if(state.i===QUESTIONS.length-1)result();else{state.i++;quiz()}scrollTop();break;case 'copy':copyResult();break;case 'poster':exportPoster();break;case 'restart':restart();break;}}
+function copyResult(){const r=getResult();const t=TYPES[r.type];const s=`我在「灵魂三分测试」测出：${t.name}\n${t.line}\n理性 ${r.dims.reason}% · 激情 ${r.dims.spirit}% · 欲望 ${r.dims.appetite}%\n（12题趣味自评，柏拉图《理想国》通俗化改编，不是心理诊断）`;
+ if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(s).then(()=>toast('结果已复制，可以分享啦')).catch(()=>fallbackCopy(s));}else fallbackCopy(s)
+}
+function fallbackCopy(s){const el=document.createElement('textarea');el.value=s;el.style.position='fixed';el.style.opacity='0';document.body.appendChild(el);el.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}el.remove();toast(ok?'结果已复制，可以分享啦':'复制失败，可以手动截图分享')}
+function exportPoster(){const r=getResult(),t=TYPES[r.type],cv=document.createElement('canvas');cv.width=1080;cv.height=1440;const ctx=cv.getContext('2d');if(!ctx){toast('当前浏览器不支持海报导出');return}const grad=ctx.createLinearGradient(0,0,1080,1440);grad.addColorStop(0,'#fbf6e8');grad.addColorStop(1,'#e9dcc0');ctx.fillStyle=grad;ctx.fillRect(0,0,1080,1440);
+ function rr(x,y,w,h,rad,fill){ctx.fillStyle=fill;ctx.beginPath();ctx.roundRect(x,y,w,h,rad);ctx.fill()}
+ function txt(s,x,y,size,color,weight='700',align='left'){ctx.fillStyle=color;ctx.font=`${weight} ${size}px Georgia, "Songti SC", "SimSun", sans-serif`;ctx.textAlign=align;ctx.fillText(s,x,y)}
+ txt('PLATO SOUL  /  柏拉图灵魂三分',85,135,32,'#8a6d1f','800');rr(65,205,950,975,48,'#fffdf6');txt('我的灵魂档案',125,312,43,'#8a7f68','800');txt(t.name,125,425,72,'#8a6d1f','900');txt(t.line,125,530,38,'#5c4f38','800');
+ let yy=660;Object.keys(DIMENSIONS).forEach(k=>{txt(DIMENSIONS[k].name+' · '+DIMENSIONS[k].metal,125,yy,32,'#77616c','700');rr(125,yy+22,780,19,10,'#f0e8d2');rr(125,yy+22,Math.max(1,780*r.dims[k]/100),19,10,'#a67c2e');txt(String(r.dims[k])+'%',922,yy,30,'#8a6d1f','800','right');yy+=90});
+ txt('12题趣味自评  ·  结果仅供探索和分享',540,1277,29,'#9d8491','600','center');txt('理性是舵手，激情是战马，欲望是拉车的马',540,1336,30,'#8a6d1f','700','center');
+ cv.toBlob(blob=>{if(!blob){toast('海报生成失败');return}const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`灵魂三分-${t.name}.png`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);toast('海报已生成，若未自动保存可截屏结果页')},'image/png');
+}
+window.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+intro();
+</script>
+</body>
+</html>
